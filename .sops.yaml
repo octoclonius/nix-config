@@ -1,0 +1,12 @@
+keys:
+  - &aegis age1q98xjct2tk39pptxr4k4zwxuz94ccl9qrxensn7qm99va2ek0ufs2h6asz
+  - &athena age1pq520eqpslfnw4pjxgf46vgxg6j08w3977s6vegk7g367wfvndns9rkvv8
+creation_rules:
+  - path_regex: hosts/aegis/secrets\.yaml$
+    key_groups:
+      - age:
+          - *aegis
+  - path_regex: hosts/athena/secrets\.yaml$
+    key_groups:
+      - age:
+          - *athena
