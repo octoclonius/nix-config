@@ -12,30 +12,22 @@ _: {
         default = { };
       };
 
-      config = {
-        launchd = {
-          agents = {
-            gpg-import-sops = lib.mkIf pkgs.stdenv.isDarwin (
-              lib.recursiveUpdate {
-                enable = true;
-                config = {
-                  ProgramArguments = [
-                    "${pkgs.gnupg}/bin/gpg"
-                    "--batch"
-                    "--import"
-                    "${config.sops.secrets.gpg.path}"
-                  ];
-                  RunAtLoad = true;
-                };
-              } config.my.home.gpg-import-sops.overrides
-            );
+      config = lib.mkMerge [
+        (lib.mkIf pkgs.stdenv.isDarwin {
+          home = {
+            activation = {
+              gpg-import-sops = lib.recursiveUpdate (lib.hm.dag.entryAfter [ "sops-nix" ] ''
+                $DRY_RUN_CMD ${pkgs.gnupg}/bin/gpg --batch --import ${lib.escapeShellArg config.sops.secrets.gpg.path}
+              '') config.my.home.gpg-import-sops.overrides;
+            };
           };
-        };
-        systemd = {
-          user = {
-            services = {
-              gpg-import-sops = lib.mkIf pkgs.stdenv.isLinux (
-                lib.recursiveUpdate {
+        })
+
+        (lib.mkIf pkgs.stdenv.isLinux {
+          systemd = {
+            user = {
+              services = {
+                gpg-import-sops = lib.recursiveUpdate {
                   Install = {
                     WantedBy = [ "default.target" ];
                   };
@@ -48,11 +40,11 @@ _: {
                     Description = "Import GPG key from sops-nix";
                     Requires = [ "sops-nix.service" ];
                   };
-                } config.my.home.gpg-import-sops.overrides
-              );
+                } config.my.home.gpg-import-sops.overrides;
+              };
             };
           };
-        };
-      };
+        })
+      ];
     };
 }
