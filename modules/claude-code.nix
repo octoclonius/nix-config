@@ -9,7 +9,6 @@ _: {
       programs = {
         claude-code = lib.recursiveUpdate {
           enable = true;
-          enableMcpIntegration = true;
           settings = {
             attribution = {
               commit = "";
@@ -23,12 +22,11 @@ _: {
               CLAUDE_CODE_NO_FLICKER = 1;
               DISABLE_EXTRA_USAGE_COMMAND = 1;
               DISABLE_INSTALL_GITHUB_APP_COMMAND = 1;
-              DISABLE_INSTALLATION_CHECKS = 1;
             };
             permissions = {
-              deny = [ "Bash(find /*)" ];
               defaultMode = "auto";
             };
+            lspRecommendationDisabled = true;
             showThinkingSummaries = true;
             theme = "dark";
             workflowKeywordTriggerEnabled = false;

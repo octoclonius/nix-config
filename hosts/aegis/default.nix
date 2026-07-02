@@ -156,6 +156,7 @@ in
                         osu-lazer-bin
                         polychromatic
                         signal-desktop
+                        ungoogled-chromium
                         vlc
                         wl-clipboard
                         yt-dlp
