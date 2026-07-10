@@ -23,7 +23,7 @@ _: {
           "ungoogled-chromium"
           "unity-hub"
           "visual-studio-code@insiders"
-          "vlc"
+          "vlc@nightly"
         ];
         onActivation = {
           cleanup = "zap";
