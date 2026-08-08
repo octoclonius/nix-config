@@ -26,6 +26,10 @@
       flake = false;
     };
     import-tree.url = "github:vic/import-tree";
+    krun = {
+      url = "github:slp/homebrew-krun";
+      flake = false;
+    };
     mac-app-util.url = "github:hraban/mac-app-util";
     nix-darwin = {
       url = "github:lnl7/nix-darwin";

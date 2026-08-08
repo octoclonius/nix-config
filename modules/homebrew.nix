@@ -8,7 +8,11 @@ _: {
     config = {
       homebrew = lib.recursiveUpdate {
         enable = true;
-        brews = [ "gradle" ];
+        brews = [
+          "gradle"
+          "krunkit"
+          "podman"
+        ];
         casks = [
           "alt-tab"
           "anytype"
