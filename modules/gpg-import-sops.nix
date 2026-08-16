@@ -13,7 +13,7 @@ _: {
       };
 
       config = lib.mkMerge [
-        (lib.mkIf pkgs.stdenv.isDarwin {
+        (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
           home = {
             activation = {
               gpg-import-sops = lib.recursiveUpdate (lib.hm.dag.entryAfter [ "sops-nix" ] ''
@@ -23,7 +23,7 @@ _: {
           };
         })
 
-        (lib.mkIf pkgs.stdenv.isLinux {
+        (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
           systemd = {
             user = {
               services = {

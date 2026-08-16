@@ -23,7 +23,7 @@ _: {
                   disabled = true;
                   args = [
                     (
-                      if pkgs.stdenv.isDarwin then
+                      if pkgs.stdenv.hostPlatform.isDarwin then
                         "--executable-path=/Applications/Chromium.app/Contents/MacOS/Chromium"
                       else
                         "--executable-path=${pkgs.ungoogled-chromium}/bin/chromium"
