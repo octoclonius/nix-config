@@ -1,8 +1,12 @@
 {
+  config,
   inputs,
   lib,
   ...
 }:
+let
+  flakeConfig = config;
+in
 {
   imports = [
     inputs.flake-file.flakeModules.dendritic
@@ -13,6 +17,10 @@
 
   flake-file = {
     inputs = {
+      deploy-rs = {
+        url = lib.mkDefault "github:serokell/deploy-rs";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
       flake-file = {
         url = lib.mkDefault "github:vic/flake-file";
       };
@@ -71,8 +79,17 @@
   };
 
   perSystem =
-    { config, pkgs, ... }:
     {
+      config,
+      pkgs,
+      system,
+      ...
+    }:
+    {
+      checks = lib.optionalAttrs pkgs.stdenv.isLinux (
+        inputs.deploy-rs.lib.${system}.deployChecks flakeConfig.flake.deploy
+      );
+
       devShells = {
         default = pkgs.mkShell {
           packages = config.pre-commit.settings.enabledPackages;
