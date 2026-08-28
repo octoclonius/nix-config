@@ -86,7 +86,7 @@ in
       ...
     }:
     {
-      checks = lib.optionalAttrs pkgs.stdenv.isLinux (
+      checks = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux (
         inputs.deploy-rs.lib.${system}.deployChecks flakeConfig.flake.deploy
       );
 
