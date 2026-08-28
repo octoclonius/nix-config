@@ -72,7 +72,7 @@ in
         inputs.nixpkgs.follows = "nixpkgs";
       };
       tuigreet = {
-        url = lib.mkDefault "github:notashelf/tuigreet";
+        url = lib.mkDefault "github:tuigreet/tuigreet";
         inputs.nixpkgs.follows = "nixpkgs";
       };
     };
