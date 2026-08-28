@@ -67,5 +67,17 @@ _: {
           };
         };
       };
+
+      systemd = {
+        services = {
+          dnscrypt-proxy = {
+            after = [ "network-online.target" ];
+            unitConfig = {
+              StartLimitBurst = "20";
+              StartLimitIntervalSec = "120";
+            };
+          };
+        };
+      };
     };
 }

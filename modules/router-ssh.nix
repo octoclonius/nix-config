@@ -51,7 +51,7 @@ _: {
               description = "Wait for the LAN bridge IPv4 address to be configured";
               requires = [ "systemd-networkd.service" ];
               serviceConfig = {
-                ExecStart = "${config.systemd.package}/lib/systemd/systemd-networkd-wait-online --interface=${cfg.lanBridge} --ipv4";
+                ExecStart = "${config.systemd.package}/lib/systemd/systemd-networkd-wait-online --interface=${cfg.lanBridge}:off --ipv4";
                 RemainAfterExit = true;
                 Type = "oneshot";
               };
