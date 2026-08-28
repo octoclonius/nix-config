@@ -103,7 +103,7 @@ _: {
               RemainAfterExit = true;
               Type = "oneshot";
             };
-            wantedBy = [ "multi-user.target" ];
+            wantedBy = [ wanDevice ];
           };
         };
       };

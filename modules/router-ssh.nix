@@ -44,6 +44,27 @@ _: {
           };
         };
 
+        systemd = {
+          services = {
+            lanAddressReady = {
+              after = [ "systemd-networkd.service" ];
+              description = "Wait for the LAN bridge IPv4 address to be configured";
+              requires = [ "systemd-networkd.service" ];
+              serviceConfig = {
+                ExecStart = "${config.systemd.package}/lib/systemd/systemd-networkd-wait-online --interface=${cfg.lanBridge} --ipv4";
+                RemainAfterExit = true;
+                Type = "oneshot";
+              };
+              wantedBy = [ "multi-user.target" ];
+            };
+
+            sshd = {
+              after = [ "lanAddressReady.service" ];
+              requires = [ "lanAddressReady.service" ];
+            };
+          };
+        };
+
         users = {
           users = {
             root = {
