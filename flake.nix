@@ -4,6 +4,10 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -26,10 +30,6 @@
       flake = false;
     };
     import-tree.url = "github:vic/import-tree";
-    krun = {
-      url = "github:slp/homebrew-krun";
-      flake = false;
-    };
     mac-app-util.url = "github:hraban/mac-app-util";
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
@@ -47,7 +47,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     tuigreet = {
-      url = "github:notashelf/tuigreet";
+      url = "github:tuigreet/tuigreet";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
