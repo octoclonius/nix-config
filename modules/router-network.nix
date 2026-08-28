@@ -4,10 +4,12 @@ _: {
       config,
       lib,
       pkgs,
+      utils,
       ...
     }:
     let
       cfg = config.my.router.network;
+      wanDevice = "sys-subsystem-net-devices-${utils.escapeSystemdPath cfg.wanInterface}.device";
     in
     {
       boot = {
@@ -89,15 +91,19 @@ _: {
         };
         services = {
           e1000e-workaround = {
-            description = "Disable hardware offloading on e1000e to prevent hangs";
-            after = [ "network-pre.target" ];
+            after = [
+              "network-pre.target"
+              wanDevice
+            ];
             before = [ "network.target" ];
-            wantedBy = [ "multi-user.target" ];
+            bindsTo = [ wanDevice ];
+            description = "Disable hardware offloading on e1000e to prevent hangs";
             serviceConfig = {
-              Type = "oneshot";
-              RemainAfterExit = true;
               ExecStart = "${pkgs.ethtool}/bin/ethtool -K ${cfg.wanInterface} gso off gro off tso off tx off rx off rxvlan off txvlan off sg off";
+              RemainAfterExit = true;
+              Type = "oneshot";
             };
+            wantedBy = [ "multi-user.target" ];
           };
         };
       };

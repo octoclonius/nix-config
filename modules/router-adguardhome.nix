@@ -8,12 +8,24 @@ _: {
       services = {
         adguardhome = {
           enable = true;
-          allowDHCP = true;
-          host = cfg.lanIp;
+          host = "127.0.0.1";
           mutableSettings = false;
           openFirewall = false;
           port = cfg.adguardPort;
           settings = {
+            dhcp = {
+              enabled = true;
+              interface_name = cfg.lanBridge;
+              local_domain_name = cfg.domain;
+              dhcpv4 = {
+                gateway_ip = cfg.lanIp;
+                lease_duration = 86400;
+                range_end = cfg.dhcpEnd;
+                range_start = cfg.dhcpStart;
+                subnet_mask = cfg.lanMask;
+              };
+            };
+
             dns = {
               bind_hosts = [
                 cfg.lanIp
@@ -28,19 +40,6 @@ _: {
               upstream_dns = [
                 cfg.dnscryptListenAddress
               ];
-
-              dhcp = {
-                enabled = true;
-                interface_name = cfg.lanBridge;
-                local_domain_name = cfg.domain;
-                dhcpv4 = {
-                  gateway_ip = cfg.lanIp;
-                  subnet_mask = cfg.lanMask;
-                  range_start = cfg.dhcpStart;
-                  range_end = cfg.dhcpEnd;
-                  lease_duration = 86400;
-                };
-              };
             };
 
             filtering = {

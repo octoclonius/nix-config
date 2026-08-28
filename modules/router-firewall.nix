@@ -9,7 +9,9 @@ _: {
         kernel = {
           sysctl = {
             "net.ipv4.conf.all.accept_redirects" = 0;
+            "net.ipv4.conf.all.rp_filter" = 1;
             "net.ipv4.conf.default.accept_redirects" = 0;
+            "net.ipv4.conf.default.rp_filter" = 1;
             "net.ipv6.conf.all.accept_redirects" = 0;
             "net.ipv6.conf.default.accept_redirects" = 0;
           };
@@ -49,6 +51,7 @@ _: {
                   time-exceeded
                 } accept
 
+                iifname "${cfg.wanInterface}" udp dport 68 accept
                 iifname "${cfg.wanInterface}" udp dport dhcpv6-client accept
               }
 

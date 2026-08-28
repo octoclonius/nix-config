@@ -11,7 +11,7 @@ _: {
             network = {
               adguardPort = lib.mkOption {
                 default = 3000;
-                description = "Port for the AdGuard Home web UI";
+                description = "Port for the AdGuard Home web UI (bound to localhost only)";
                 type = lib.types.int;
               };
 
