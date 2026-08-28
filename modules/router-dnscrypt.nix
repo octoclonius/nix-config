@@ -28,15 +28,7 @@ _: {
               cfg.dnscryptListenAddress
             ];
 
-            nx_log = {
-              enabled = false;
-            };
-
             odoh_servers = true;
-
-            query_log = {
-              enabled = false;
-            };
 
             require_dnssec = true;
             require_nofilter = true;
