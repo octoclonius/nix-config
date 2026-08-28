@@ -57,6 +57,18 @@ _: {
                 type = lib.types.str;
               };
 
+              lanIpv6Address = lib.mkOption {
+                default = "fd7f10:bb4c:5c48::1/64";
+                description = "IPv6 address of the router on the LAN bridge";
+                type = lib.types.str;
+              };
+
+              lanIpv6Prefix = lib.mkOption {
+                default = "fd7f10:bb4c:5c48::/64";
+                description = "IPv6 prefix advertised on the LAN bridge (must be a /64 for SLAAC)";
+                type = lib.types.str;
+              };
+
               lanMask = lib.mkOption {
                 default = "255.255.255.0";
                 description = "Subnet mask for the LAN";

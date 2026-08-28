@@ -42,15 +42,18 @@ _: {
           };
           networks = {
             "10-wan" = {
+              dhcpV6Config = {
+                PrefixDelegationHint = "::/64";
+              };
+              linkConfig = {
+                RequiredForOnline = "routable";
+              };
               matchConfig = {
                 Name = cfg.wanInterface;
               };
               networkConfig = {
                 DHCP = "yes";
                 IPv6AcceptRA = true;
-              };
-              linkConfig = {
-                RequiredForOnline = "routable";
               };
             };
           }
@@ -73,18 +76,32 @@ _: {
           ))
           // {
             "40-${cfg.lanBridge}" = {
-              matchConfig = {
-                Name = cfg.lanBridge;
-              };
               address = [
                 "${cfg.lanIp}/${toString cfg.lanPrefixLength}"
+                cfg.lanIpv6Address
               ];
-              networkConfig = {
-                ConfigureWithoutCarrier = true;
-                IPv6AcceptRA = false;
+              ipv6Prefixes = [
+                {
+                  AddressAutoconfiguration = true;
+                  OnLink = true;
+                  Prefix = cfg.lanIpv6Prefix;
+                }
+              ];
+              ipv6SendRAConfig = {
+                DNS = [ (lib.replaceStrings [ "::/64" ] [ "::1" ] cfg.lanIpv6Prefix) ];
+                EmitDNS = true;
               };
               linkConfig = {
                 RequiredForOnline = "no";
+              };
+              matchConfig = {
+                Name = cfg.lanBridge;
+              };
+              networkConfig = {
+                ConfigureWithoutCarrier = true;
+                DHCPPrefixDelegation = true;
+                IPv6AcceptRA = false;
+                IPv6SendRA = true;
               };
             };
           };

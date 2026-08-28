@@ -1,6 +1,6 @@
 _: {
   flake.modules.nixos.routerAdguardhome =
-    { config, ... }:
+    { config, lib, ... }:
     let
       cfg = config.my.router.network;
     in
@@ -15,8 +15,6 @@ _: {
           settings = {
             dhcp = {
               enabled = true;
-              interface_name = cfg.lanBridge;
-              local_domain_name = cfg.domain;
               dhcpv4 = {
                 gateway_ip = cfg.lanIp;
                 lease_duration = 86400;
@@ -24,12 +22,15 @@ _: {
                 range_start = cfg.dhcpStart;
                 subnet_mask = cfg.lanMask;
               };
+              interface_name = cfg.lanBridge;
+              local_domain_name = cfg.domain;
             };
 
             dns = {
               bind_hosts = [
                 cfg.lanIp
                 "127.0.0.1"
+                (lib.replaceStrings [ "::/64" ] [ "::1" ] cfg.lanIpv6Prefix)
               ];
               bootstrap_dns = [
                 "9.9.9.9"

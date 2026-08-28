@@ -9,24 +9,36 @@
 }:
 
 {
-  boot.extraModulePackages = [ ];
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "ahci"
-    "nvme"
-    "usbhid"
-    "uas"
-    "usb_storage"
-    "sd_mod"
-  ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot = {
+    extraModulePackages = [ ];
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "nvme"
+        "usbhid"
+        "uas"
+        "usb_storage"
+        "sd_mod"
+      ];
+      kernelModules = [ ];
+    };
+    kernelModules = [ "kvm-intel" ];
+  };
 
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware = {
+    cpu = {
+      intel = {
+        updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+      };
+    };
+  };
 
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  nixpkgs = {
+    hostPlatform = lib.mkDefault "x86_64-linux";
+  };
 }
