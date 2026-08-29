@@ -86,6 +86,14 @@ in
       ...
     }:
     {
+      apps = {
+        deploy-rs = inputs.deploy-rs.apps.${system}.deploy-rs // {
+          meta = {
+            description = "Deploy NixOS systems with deploy-rs";
+          };
+        };
+      };
+
       checks = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux (
         inputs.deploy-rs.lib.${system}.deployChecks flakeConfig.flake.deploy
       );
