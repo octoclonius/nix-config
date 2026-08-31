@@ -278,11 +278,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1787884525,
-        "narHash": "sha256-mc3Z6ykwgIqps5lFATqmfCsbELcPa9MtIc/UNbwlA7k=",
+        "lastModified": 1788130444,
+        "narHash": "sha256-zlF3+b/KD334e+w2xlWZC1eHOKL7H2aYCLFHeXEEuI0=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "2f08f57336cd4d28781e6602010f3665e28ba9a1",
+        "rev": "052c719b0679b41b7d40eeeef42d875c409a5e72",
         "type": "github"
       },
       "original": {
@@ -294,11 +294,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1787887710,
-        "narHash": "sha256-ybu6Vd2ua2HJd0D/qahlkVTbBibZ+mrarAleqpPpDlI=",
+        "lastModified": 1788137236,
+        "narHash": "sha256-R7Adj6P35pPOD/zX+5T2DLBMk+F+LTu8noIw8toZCP4=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "10e27e8030e76d3dd9a5fd1e4d69145de27bcdee",
+        "rev": "3908cde8dc0c2acdc8b98133fd564de41631ca3b",
         "type": "github"
       },
       "original": {
@@ -319,6 +319,22 @@
       "original": {
         "owner": "vic",
         "repo": "import-tree",
+        "type": "github"
+      }
+    },
+    "krun": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1787651105,
+        "narHash": "sha256-WRyoAdgPNXTZUi+Qr+elrL/C1Fb4Y/YKHMAH96aL5ys=",
+        "owner": "libkrun",
+        "repo": "homebrew-krun",
+        "rev": "22c9fefa95ee51dbb9fee72521ebe6be0794d2ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "libkrun",
+        "repo": "homebrew-krun",
         "type": "github"
       }
     },
@@ -479,11 +495,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1787814960,
-        "narHash": "sha256-PYZq1qzCJXC2zGI0mH07vrZBsw6DRBAOX0jN1pPtqOQ=",
+        "lastModified": 1787964612,
+        "narHash": "sha256-0N9nghg3nwzX6b6qc77EzjR9cu/Z+UR66FlfsCqiURs=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c27cdad491a991b11ed731760aa2ef8db0cb0410",
+        "rev": "e8be7818e19ada32105a8af937a6a473b38167ca",
         "type": "github"
       },
       "original": {
@@ -495,11 +511,11 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1787736819,
-        "narHash": "sha256-cV5xEJJK3BvhU8rEd4mC9UsmDi5qscv/kzGPhBRC5WA=",
+        "lastModified": 1788039129,
+        "narHash": "sha256-pa4Q0qErvCvzCaaUph7Sm37RhR4xvPrYI8Lgz6k85+A=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "9fbb54b33e91ee4ca368e35a78e0613c720600b3",
+        "rev": "d2f67949798825fe853f7c5d0492b8bf016d3f88",
         "type": "github"
       },
       "original": {
@@ -515,11 +531,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1787887921,
-        "narHash": "sha256-9KJYrWwpLEr3efTh/7QwyAvsv+pawc1+4gS4vAP2NZE=",
+        "lastModified": 1788137285,
+        "narHash": "sha256-5s8qnkQKG3Oaer0RxI90TRuHyOgaFfxMXsxYQbSvONI=",
         "owner": "nix-community",
         "repo": "nur",
-        "rev": "40e2cca679d8a5d97803f9e3b46c25773b823d91",
+        "rev": "707c16e677418b03d235a4f15c9580e37daa7512",
         "type": "github"
       },
       "original": {
@@ -537,11 +553,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787776375,
-        "narHash": "sha256-gxa6C1+Xfl0ys5h0X/ocusbwT3ABIdX38mrX3MRmPnM=",
+        "lastModified": 1788115442,
+        "narHash": "sha256-hpEx9BvlTtnONKZK/GAdVtQriW14x0ec+Ir5uafNPYY=",
         "owner": "notashelf",
         "repo": "nvf",
-        "rev": "f019fe83c224eedb145982a9a26b764e7cb2fdd0",
+        "rev": "f33afa7a878cfac9bebab42d8eccc7680c389cd6",
         "type": "github"
       },
       "original": {
@@ -560,6 +576,7 @@
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
         "import-tree": "import-tree",
+        "krun": "krun",
         "mac-app-util": "mac-app-util",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
