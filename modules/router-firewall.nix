@@ -3,6 +3,7 @@ _: {
     { config, ... }:
     let
       cfg = config.my.router.network;
+      guestVlan = "br-lan.${toString cfg.guestVlanId}";
     in
     {
       boot = {
@@ -31,6 +32,9 @@ _: {
 
                 iifname "lo" accept
                 iifname "${cfg.lanBridge}" accept
+
+                iifname "${guestVlan}" tcp dport 53 accept
+                iifname "${guestVlan}" udp dport { 53, 67 } accept
 
                 iifname "${cfg.wanInterface}" ct state invalid drop
                 iifname "${cfg.wanInterface}" ct state established,related accept
@@ -61,7 +65,11 @@ _: {
                 ct state invalid drop
                 ct state established,related accept
 
-                iifname "${cfg.lanBridge}" oifname "${cfg.wanInterface}" accept
+                iifname "${guestVlan}" ip daddr { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 } drop
+                iifname "${guestVlan}" ip6 daddr fc00::/7 drop
+                iifname "${guestVlan}" oifname "${cfg.wanInterface}" meta nfproto ipv4 accept
+
+                iifname "${cfg.lanBridge}" accept
               }
             }
 

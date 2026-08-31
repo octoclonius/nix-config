@@ -13,19 +13,6 @@ _: {
           openFirewall = false;
           port = cfg.adguardPort;
           settings = {
-            dhcp = {
-              enabled = true;
-              dhcpv4 = {
-                gateway_ip = cfg.lanIp;
-                lease_duration = 86400;
-                range_end = cfg.dhcpEnd;
-                range_start = cfg.dhcpStart;
-                subnet_mask = cfg.lanMask;
-              };
-              interface_name = cfg.lanBridge;
-              local_domain_name = cfg.domain;
-            };
-
             dns = {
               bind_hosts = [
                 cfg.lanIp
