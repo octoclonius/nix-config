@@ -47,6 +47,10 @@ in
       import-tree = {
         url = lib.mkDefault "github:vic/import-tree";
       };
+      krun = {
+        flake = false;
+        url = lib.mkDefault "github:libkrun/homebrew-krun";
+      };
       mac-app-util = {
         url = lib.mkDefault "github:hraban/mac-app-util";
       };

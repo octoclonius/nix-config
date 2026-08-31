@@ -45,6 +45,42 @@ _: {
                 type = lib.types.str;
               };
 
+              guestDhcpEnd = lib.mkOption {
+                default = "10.0.20.200";
+                description = "Last IP address handed out by guest DHCP";
+                type = lib.types.str;
+              };
+
+              guestDhcpStart = lib.mkOption {
+                default = "10.0.20.100";
+                description = "First IP address handed out by guest DHCP";
+                type = lib.types.str;
+              };
+
+              guestIp = lib.mkOption {
+                default = "10.0.20.1";
+                description = "IP address of the router on the guest VLAN";
+                type = lib.types.str;
+              };
+
+              guestMask = lib.mkOption {
+                default = "255.255.255.0";
+                description = "Subnet mask for the guest VLAN";
+                type = lib.types.str;
+              };
+
+              guestPrefixLength = lib.mkOption {
+                default = 24;
+                description = "CIDR prefix length for the guest VLAN";
+                type = lib.types.int;
+              };
+
+              guestVlanId = lib.mkOption {
+                default = 20;
+                description = "VLAN ID for the guest network";
+                type = lib.types.ints.between 1 4094;
+              };
+
               lanBridge = lib.mkOption {
                 default = "br-lan";
                 description = "Name of the LAN bridge interface";
@@ -90,6 +126,18 @@ _: {
                 default = 24;
                 description = "CIDR prefix length for the LAN subnet";
                 type = lib.types.int;
+              };
+
+              mainVlanId = lib.mkOption {
+                default = 10;
+                description = "Native (untagged) VLAN ID for the main network";
+                type = lib.types.ints.between 1 4094;
+              };
+
+              trunkPorts = lib.mkOption {
+                default = [ ];
+                description = "LAN ports that additionally carry tagged VLANs (e.g., the port feeding the wireless AP)";
+                type = lib.types.listOf lib.types.str;
               };
 
               wanInterface = lib.mkOption {

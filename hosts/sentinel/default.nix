@@ -39,6 +39,15 @@
           };
 
           router = {
+            network = {
+              trunkPorts = [
+                "enp1s0f0"
+                "enp1s0f1"
+                "enp1s0f2"
+                "enp1s0f3"
+              ];
+            };
+
             ssh = {
               authorizedKeys = [
                 (lib.fileContents (inputs.self + "/hosts/aegis/id_ed25519.pub"))
@@ -66,6 +75,7 @@
     ++ (with config.flake.modules.nixos; [
       routerAdguardhome
       routerDnscrypt
+      routerDnsmasq
       routerFirewall
       routerNetwork
       routerOob

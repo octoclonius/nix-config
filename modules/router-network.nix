@@ -9,6 +9,7 @@ _: {
     }:
     let
       cfg = config.my.router.network;
+      guestVlan = "br-lan.${toString cfg.guestVlanId}";
       wanDevice = "sys-subsystem-net-devices-${utils.escapeSystemdPath cfg.wanInterface}.device";
     in
     {
@@ -16,7 +17,9 @@ _: {
         kernel = {
           sysctl = {
             "net.ipv4.conf.all.forwarding" = 1;
+            "net.ipv4.ip_nonlocal_bind" = 1;
             "net.ipv6.conf.all.forwarding" = 1;
+            "net.ipv6.ip_nonlocal_bind" = 1;
           };
         };
       };
@@ -34,9 +37,21 @@ _: {
           enable = true;
           netdevs = {
             "20-${cfg.lanBridge}" = {
+              bridgeConfig = {
+                VLANFiltering = true;
+              };
               netdevConfig = {
                 Kind = "bridge";
                 Name = cfg.lanBridge;
+              };
+            };
+            "21-${guestVlan}" = {
+              netdevConfig = {
+                Kind = "vlan";
+                Name = guestVlan;
+              };
+              vlanConfig = {
+                Id = cfg.guestVlanId;
               };
             };
           };
@@ -61,15 +76,22 @@ _: {
             map (
               port:
               lib.nameValuePair "30-${port}" {
+                bridgeVLANs = lib.optional (lib.elem port cfg.trunkPorts) { VLAN = cfg.guestVlanId; } ++ [
+                  {
+                    VLAN = cfg.mainVlanId;
+                    PVID = cfg.mainVlanId;
+                    EgressUntagged = cfg.mainVlanId;
+                  }
+                ];
+                linkConfig = {
+                  RequiredForOnline = "enslaved";
+                };
                 matchConfig = {
                   Name = port;
                 };
                 networkConfig = {
                   Bridge = cfg.lanBridge;
                   ConfigureWithoutCarrier = true;
-                };
-                linkConfig = {
-                  RequiredForOnline = "enslaved";
                 };
               }
             ) cfg.lanPorts
@@ -79,6 +101,14 @@ _: {
               address = [
                 "${cfg.lanIp}/${toString cfg.lanPrefixLength}"
                 cfg.lanIpv6Address
+              ];
+              bridgeVLANs = [
+                {
+                  VLAN = cfg.mainVlanId;
+                  PVID = cfg.mainVlanId;
+                  EgressUntagged = cfg.mainVlanId;
+                }
+                { VLAN = cfg.guestVlanId; }
               ];
               ipv6Prefixes = [
                 {
@@ -102,6 +132,21 @@ _: {
                 DHCPPrefixDelegation = true;
                 IPv6AcceptRA = false;
                 IPv6SendRA = true;
+              };
+              vlan = [ guestVlan ];
+            };
+            "45-${guestVlan}" = {
+              address = [ "${cfg.guestIp}/${toString cfg.guestPrefixLength}" ];
+              linkConfig = {
+                RequiredForOnline = "no";
+              };
+              matchConfig = {
+                Name = guestVlan;
+              };
+              networkConfig = {
+                ConfigureWithoutCarrier = true;
+                IPv6AcceptRA = false;
+                LinkLocalAddressing = "no";
               };
             };
           };
