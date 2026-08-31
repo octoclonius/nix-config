@@ -16,6 +16,7 @@ _: {
             dns = {
               bind_hosts = [
                 cfg.lanIp
+                cfg.guestIp
                 "127.0.0.1"
                 (lib.replaceStrings [ "::/64" ] [ "::1" ] cfg.lanIpv6Prefix)
               ];

@@ -11,8 +11,9 @@ _: {
           enable = true;
           resolveLocalQueries = false;
           settings = {
+            bind-dynamic = true;
             dhcp-option = [
-              "tag:guest,option:dns-server,${cfg.lanIp}"
+              "tag:guest,option:dns-server,${cfg.guestIp}"
               "tag:guest,option:router,${cfg.guestIp}"
               "tag:main,option:dns-server,${cfg.lanIp}"
               "tag:main,option:domain-name,${cfg.domain}"

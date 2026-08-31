@@ -78,7 +78,7 @@ _: {
               guestVlanId = lib.mkOption {
                 default = 20;
                 description = "VLAN ID for the guest network";
-                type = lib.types.int;
+                type = lib.types.ints.between 1 4094;
               };
 
               lanBridge = lib.mkOption {
@@ -131,7 +131,7 @@ _: {
               mainVlanId = lib.mkOption {
                 default = 10;
                 description = "Native (untagged) VLAN ID for the main network";
-                type = lib.types.int;
+                type = lib.types.ints.between 1 4094;
               };
 
               trunkPorts = lib.mkOption {
