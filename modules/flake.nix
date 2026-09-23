@@ -22,7 +22,7 @@ in
         inputs.nixpkgs.follows = "nixpkgs";
       };
       flake-file = {
-        url = lib.mkDefault "github:vic/flake-file";
+        url = lib.mkDefault "github:denful/flake-file";
       };
       flake-parts = {
         url = lib.mkDefault "github:hercules-ci/flake-parts";
@@ -45,7 +45,7 @@ in
         url = lib.mkDefault "github:homebrew/homebrew-core";
       };
       import-tree = {
-        url = lib.mkDefault "github:vic/import-tree";
+        url = lib.mkDefault "github:denful/import-tree";
       };
       krun = {
         flake = false;
