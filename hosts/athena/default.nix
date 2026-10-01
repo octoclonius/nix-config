@@ -41,12 +41,6 @@ in
             taps = {
               "homebrew/homebrew-cask" = inputs.homebrew-cask;
               "homebrew/homebrew-core" = inputs.homebrew-core;
-              "slp/homebrew-krun" = inputs.krun;
-            };
-            trust = {
-              taps = [
-                "slp/krun"
-              ];
             };
             user = config.my.darwin.primaryUser;
           };

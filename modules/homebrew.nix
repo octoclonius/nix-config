@@ -10,7 +10,6 @@ _: {
         enable = true;
         brews = [
           "gradle"
-          "krunkit"
           "podman"
         ];
         casks = [
@@ -21,7 +20,6 @@ _: {
           "opencode-desktop"
           "sanesidebuttons"
           "steam"
-          "syncthing-app"
           "ungoogled-chromium"
           "visual-studio-code@insiders"
           "vlc@nightly"

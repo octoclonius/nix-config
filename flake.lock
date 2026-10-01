@@ -322,22 +322,6 @@
         "type": "github"
       }
     },
-    "krun": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1790755595,
-        "narHash": "sha256-zGxmWyYUslnPNzJSNYOB8/GIkfyOUaiXB8GEZKqfDU4=",
-        "owner": "libkrun",
-        "repo": "homebrew-krun",
-        "rev": "9a2429bb157c5a0460a5ad6f4c12f368bf52b078",
-        "type": "github"
-      },
-      "original": {
-        "owner": "libkrun",
-        "repo": "homebrew-krun",
-        "type": "github"
-      }
-    },
     "mac-app-util": {
       "inputs": {
         "cl-nix-lite": "cl-nix-lite",
@@ -576,7 +560,6 @@
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
         "import-tree": "import-tree",
-        "krun": "krun",
         "mac-app-util": "mac-app-util",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
