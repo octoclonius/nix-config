@@ -18,13 +18,11 @@ _: {
           "anytype"
           "blender"
           "discord"
-          "ollama-app"
           "opencode-desktop"
           "sanesidebuttons"
           "steam"
           "syncthing-app"
           "ungoogled-chromium"
-          "unity-hub"
           "visual-studio-code@insiders"
           "vlc@nightly"
         ];
