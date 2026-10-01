@@ -1,6 +1,7 @@
 { config, inputs, ... }:
 let
   homeAspects = with config.flake.modules.homeManager; [
+    claude-code
     direnv
     gh
     git
@@ -27,7 +28,7 @@ in
       inputs.nix-homebrew.darwinModules.nix-homebrew
 
       (
-        { config, ... }:
+        { config, lib, ... }:
         {
           networking = {
             computerName = config.networking.hostName;
@@ -67,6 +68,18 @@ in
                     "@admin"
                     "root"
                   ];
+                };
+              };
+            };
+
+            nixpkgs = {
+              overrides = {
+                config = {
+                  allowUnfreePredicate =
+                    pkg:
+                    builtins.elem (lib.getName pkg) [
+                      "claude-code"
+                    ];
                 };
               };
             };

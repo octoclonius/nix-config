@@ -18,7 +18,6 @@ _: {
           "anytype"
           "blender"
           "discord"
-          "epic-games"
           "ollama-app"
           "opencode-desktop"
           "sanesidebuttons"
