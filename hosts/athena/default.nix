@@ -98,6 +98,12 @@ in
                   ...
                 }:
                 {
+                  home = {
+                    sessionPath = [
+                      "$HOME/Library/Android/sdk/platform-tools"
+                    ];
+                  };
+
                   imports = homeAspects ++ [
                     inputs.mac-app-util.homeManagerModules.default
                     inputs.nvf.homeManagerModules.default

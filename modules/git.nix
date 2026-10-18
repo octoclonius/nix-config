@@ -20,6 +20,10 @@ _: {
       programs = {
         git = lib.recursiveUpdate {
           enable = true;
+          ignores = [
+            "**/.claude/settings.local.json"
+            ".DS_Store"
+          ];
           lfs = {
             enable = true;
           };

@@ -14,6 +14,7 @@ _: {
         ];
         casks = [
           "alt-tab"
+          "android-studio"
           "anytype"
           "blender"
           "discord"
@@ -22,7 +23,7 @@ _: {
           "steam"
           "ungoogled-chromium"
           "visual-studio-code@insiders"
-          "vlc@nightly"
+          "vlc"
         ];
         onActivation = {
           cleanup = "zap";
