@@ -49,6 +49,7 @@ in
       };
       mac-app-util = {
         url = lib.mkDefault "github:hraban/mac-app-util";
+        inputs.nixpkgs.follows = "nixpkgs";
       };
       nix-darwin = {
         url = lib.mkDefault "github:lnl7/nix-darwin";
